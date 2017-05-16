@@ -13,9 +13,15 @@ int actions[] = {8,9,10,11};
 int actionTime = 20;
 boolean hardwareTest = false;
 boolean debug = false;
+boolean serial_singleton = false;
 
+void serialSingleton(){
+  if(!serial_singleton)
+    Serial.begin(9600);  
+}
 
 void displayReadings(){
+  serialSingleton();
   Serial.print("X: "); Serial.print(event.magnetic.x); Serial.print("  ");
   Serial.print("Y: "); Serial.print(event.magnetic.y); Serial.print("  ");
   Serial.print("Z: "); Serial.print(event.magnetic.z); Serial.print("  ");Serial.println("uT");
@@ -25,6 +31,7 @@ void act(float headingDegrees){
   int spot = (int) (headingDegrees * ((sizeof(actions)/sizeof(int))) / 360);
   
   if(debug){
+    serialSingleton();
     Serial.println(spot);
     Serial.println(headingDegrees);
     Serial.println();
@@ -50,8 +57,6 @@ void emergency(){
   }
 
 void setup() {
-  
-  Serial.begin(9600);
 
   pinMode(13, OUTPUT);
   for(int i=0 ; i < 3 ; ++i){
@@ -62,6 +67,7 @@ void setup() {
   }
     
   if(!mag.begin()){
+    serialSingleton();
     Serial.println("Check Wiring!");
     emergency();
   }
