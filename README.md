@@ -6,4 +6,6 @@ Using a 1000mhA 5V portable charger and 4 button-sized haptic engines on an Ardu
 
 This code assumes using a HMC5883 compass and accelometer chip. I used a genreic one and it worked well.
 For correct North, declinationAngle should be changed to match your position on the globe.
-the array action[] holds the output pins the engines are connected to. you could use any number of outputs. they are ordered from north clockwise.
+the array actions[] holds the output pins the engines are connected to. you could use any number of outputs. they are ordered from north clockwise.
+
+I'm not electrical engineer, but ALWAYS CONNECT ENGINES WITH A TRANSISTOR!
